@@ -1,9 +1,11 @@
-from game import *
+from game_logic import *
 from search import Desdemone
 import sys
+import time
 
 
-for i in range(10):
+start = time.perf_counter()
+for i in range(1000):
 
     b = Board()
     desde = Desdemone(print_info=False)
@@ -19,7 +21,8 @@ for i in range(10):
             b = b.make_random_move()
 
         else:
-            b = desde.run(b, .14).board
+            # b = desde.run(b, .14).board
+            b = b.make_random_move()
 
         # print_board(b)
         # print(f"{'Randy' if b.turn else 'Desdemone'} played {square_to_coordinates[b.last_move]}")
@@ -27,11 +30,14 @@ for i in range(10):
 
         assert count_bits(b.bb[2]) == x, "there is an error somewhere"
 
-    print_board(b)
-    Desdemone_score = count_bits(b.bb[1])
-    Randy_score = count_bits(b.bb[0])
+    # print_board(b)
+    # Desdemone_score = count_bits(b.bb[1])
+    # Randy_score = count_bits(b.bb[0])
+    #
+    # assert Desdemone_score + Randy_score == 64
+    #
+    # print(f"Desdemone wins with {Desdemone_score}")
+    # assert Desdemone_score > 32
 
-    assert Desdemone_score + Randy_score == 64
 
-    print(f"Desdemone wins with {Desdemone_score}")
-    assert Desdemone_score > 32
+print("time", time.perf_counter() - start)

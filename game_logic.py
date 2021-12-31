@@ -7,7 +7,13 @@ class Board:
 
     def __init__(self, bb=None, turn=0):
         if bb is None:
-            bb = [34628173824, 68853694464, 103481868288]
+            # bb = np.zeros(3, dtype=np.uint64)
+            bb = [0, 0, 0]
+            bb[0] = set_bit(bb[0], d5)
+            bb[0] = set_bit(bb[0], e4)
+            bb[1] = set_bit(bb[1], d4)
+            bb[1] = set_bit(bb[1], e5)
+            bb[2] |= bb[0] | bb[1]
         self.bb = bb
         self.turn = turn
         self.is_leaf = False

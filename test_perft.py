@@ -1,4 +1,4 @@
-from game import Board
+from game_logic import Board
 import time
 
 

@@ -1,21 +1,28 @@
 import random
 import time
 import math
+import numpy as np
+import numba as nb
+from numba import njit
 
 
+@njit(nb.b1(nb.uint64, nb.uint8), cache=True)
 def get_bit(bb, sq):
     return bb & (1 << sq)
 
 
+@njit(nb.uint64(nb.uint64, nb.uint8), cache=True)
 def set_bit(bb, sq):
     return bb | (1 << sq)
 
 
+@njit(nb.uint64(nb.uint64, nb.uint8), cache=True)
 def pop_bit(bb, sq):
     return bb & ~(1 << sq)
 
 
-def count_bits(bb) -> int:
+@njit(nb.uint8(nb.uint64), cache=True)
+def count_bits(bb):
     c = 0
     while bb:
         c += 1
@@ -23,7 +30,8 @@ def count_bits(bb) -> int:
     return c
 
 
-def get_ls1b_index(bb) -> int:
+@njit(nb.uint8(nb.uint64), cache=True)
+def get_ls1b_index(bb):
     return count_bits((bb & -bb) - 1)
 
 
