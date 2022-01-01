@@ -1,5 +1,7 @@
 from game_logic import Board
-from constants import *
+import math
+import time
+import random
 
 
 def ucb1(parent, child, temp):

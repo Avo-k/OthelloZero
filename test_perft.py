@@ -1,9 +1,12 @@
 from game_logic import Board
+from tests import test_a_game
 import time
 
 
 def perft(board, depth):
-    return sum(perft(board.make_move(move), depth - 1) for move in board.gen_moves()) if depth else 1
+    if depth == 0 or board.is_leaf:
+        return 1
+    return sum(perft(board.make_move(move), depth - 1) for move in board.gen_moves())
 
 
 def iterative_perft(max_iter=9):
@@ -26,4 +29,5 @@ def iterative_perft(max_iter=9):
 
 
 if __name__ == "__main__":
+    # test_a_game()
     iterative_perft(10)
